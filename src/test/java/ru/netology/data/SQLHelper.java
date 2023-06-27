@@ -25,40 +25,34 @@ public class SQLHelper {
     }
 
 
+    @SneakyThrows
     public static DataGenerator.CreditCardData getCreditCardData() {
         var cardDataSQL = "SELECT * FROM credit_request_entity ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             var result = runner.query(conn, cardDataSQL,
                     new BeanHandler<>(DataGenerator.CreditCardData.class));
             return result;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
-        return null;
     }
 
+    @SneakyThrows
     public static DataGenerator.PaymentCardData getPaymentCardData() {
         var cardDataSQL = "SELECT * FROM payment_entity ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             var result = runner.query(conn, cardDataSQL,
                     new BeanHandler<>(DataGenerator.PaymentCardData.class));
             return result;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
-        return null;
     }
 
+    @SneakyThrows
     public static DataGenerator.TableOrderEntity getTableOrderEntity() {
         var orderEntityDataSQL = "SELECT * FROM order_entity ORDER BY created DESC LIMIT 1";
         try (var conn = getConn()) {
             var result = runner.query(conn, orderEntityDataSQL,
                     new BeanHandler<>(DataGenerator.TableOrderEntity.class));
             return result;
-        } catch (SQLException exception) {
-            exception.printStackTrace();
         }
-        return null;
     }
 
     @SneakyThrows

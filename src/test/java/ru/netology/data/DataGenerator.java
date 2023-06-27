@@ -13,15 +13,15 @@ public class DataGenerator {
     private static Faker faker = new Faker(new Locale("en"));
 
     private static int validYear = Integer.parseInt(getCurrentYear()) + 1;
-    private static String ApprovedCard = "4444 4444 4444 4441";
-    private static String DeclinedCard = "4444 4444 4444 4442";
+    private static String approvedCard = "4444 4444 4444 4441";
+    private static String declinedCard = "4444 4444 4444 4442";
 
 
     // данные с утвержденной картой
     public static CardInfo dataWithApprovedCard() {
         var randomName = faker.name().fullName();
         var randomCvc = faker.number().digits(3);
-        return new CardInfo(ApprovedCard, getCurrentMonth(), String.valueOf(validYear), randomName, randomCvc);
+        return new CardInfo(approvedCard, getCurrentMonth(), String.valueOf(validYear), randomName, randomCvc);
     }
 
     // данные с не утвержденной картой
@@ -29,10 +29,10 @@ public class DataGenerator {
 
         var randomName = faker.name().fullName();
         var randomCvc = faker.number().digits(3);
-        return new CardInfo(DeclinedCard, getCurrentMonth(), String.valueOf(validYear), randomName, randomCvc);
+        return new CardInfo(declinedCard, getCurrentMonth(), String.valueOf(validYear), randomName, randomCvc);
     }
 
-//    данные со случайным номером карты
+    // данные со случайным номером карты
     public static CardInfo dataWithRandomCardNumber() {
         var randomName = faker.name().fullName();
         var randomCardNumber = faker.number().digits(16);
@@ -40,21 +40,21 @@ public class DataGenerator {
         return new CardInfo(randomCardNumber, getCurrentMonth(), String.valueOf(validYear), randomName, randomCvc);
     }
 
-//    данные с утвержденной картой и параметризованным месяцем и годом
+    // данные с утвержденной картой и параметризованным месяцем и годом
     public static CardInfo dataWithApprovedCardAndParametrizedMonthAndYear(String month, String year) {
         var randomName = faker.name().fullName();
         var randomCvc = faker.number().digits(3);
-        return new CardInfo(ApprovedCard, month, year, randomName, randomCvc);
+        return new CardInfo(approvedCard, month, year, randomName, randomCvc);
     }
 
 
-//    данные с именем держателя карты
+    // данные с именем держателя карты
     public static CardInfo dataWithParametrizedCardHolderName(String name) {
         var randomCvc = faker.number().digits(3);
-        return new CardInfo(ApprovedCard, getCurrentMonth(), String.valueOf(validYear), name, randomCvc);
+        return new CardInfo(approvedCard, getCurrentMonth(), String.valueOf(validYear), name, randomCvc);
     }
 
-//    данные с просроченной картой в течение одного месяца
+    // данные с просроченной картой в течение одного месяца
     public static CardInfo dataWithAnExpiredCardForOneMonth() {
         var randomName = faker.name().fullName();
         var randomCvc = faker.number().digits(3);
@@ -63,25 +63,27 @@ public class DataGenerator {
         if (currentMonth == 1) {
             currentMonth = 12;
             currentYear = currentYear - 1;
-        } else currentMonth = currentMonth - 1;
+        } else {
+            currentMonth = currentMonth - 1;
+        }
 
-        String minusOneFromCurrentMonth = "";
+        var minusOneFromCurrentMonth = "";
         if (currentMonth < 10) {
             minusOneFromCurrentMonth = "0" + currentMonth;
         }
-        return new CardInfo(ApprovedCard, minusOneFromCurrentMonth,
+        return new CardInfo(approvedCard, minusOneFromCurrentMonth,
                 String.valueOf(currentYear), randomName, randomCvc);
     }
 
     public static String getCurrentMonth() {
-        LocalDate date = LocalDate.now();
-        String currentMonth = date.format(DateTimeFormatter.ofPattern("MM"));
+        var date = LocalDate.now();
+        var currentMonth = date.format(DateTimeFormatter.ofPattern("MM"));
         return currentMonth;
     }
 
     public static String getCurrentYear() {
-        LocalDate date = LocalDate.now();
-        String currentYear = date.format(DateTimeFormatter.ofPattern("yy"));
+        var date = LocalDate.now();
+        var currentYear = date.format(DateTimeFormatter.ofPattern("yy"));
         return currentYear;
     }
 

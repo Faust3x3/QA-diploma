@@ -8,13 +8,8 @@ import io.restassured.specification.RequestSpecification;
 import static io.restassured.RestAssured.given;
 
 public class APIHelper {
-//    static String url = System.getProperty("http://localhost:8080");
-
     private static RequestSpecification requestSpec = new RequestSpecBuilder()
             .setBaseUri("http://localhost:8080")
-//            .setPort(8080)
-//            .setBaseUri(url.split(":")[0] + ":" + url.split(":")[1])
-//            .setPort(Integer.parseInt(url.split(":")[2].split("/")[0]))
             .setAccept(ContentType.JSON)
             .setContentType(ContentType.JSON)
             .log(LogDetail.ALL)
